@@ -6,6 +6,10 @@ namespace MvcApiPersonajesAWS.Controllers {
         public IActionResult Listado() {
             return View();
         }
+        
+        public IActionResult Details(int idPersonaje) {
+            return View(idPersonaje);
+        }
 
     }
 }

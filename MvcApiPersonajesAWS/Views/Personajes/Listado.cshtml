@@ -9,42 +9,39 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>IdPersonaje</th>
-            <th>Nombre</th>
-            <th>Imagen</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@*        @foreach (var item in Model) {
-            <tr>
-                <td>
-                    IdPersonaje
-                </td>
-                <td>
-                    Nombre
-                </td>
-                <td>
-                    Imagen
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
-        }*@
-    </tbody>
-</table>
+
+<div id="content"></div>
 
 @section Scripts {
     <script>
         $(document).ready(function (){
-            $.get("https://107.23.192.30/api/Personajes/GetPersonajes", function (data) {
-                console.log(data);
+            $.get("https://3.95.66.174/api/Personajes/GetPersonajes", function (data) {
+                // Limpiar el contenido de la tabla antes de agregar los datos
+                $("#content").empty();
+
+                // Crear la estructura de la tabla
+                var table = $("<table>").addClass("personajes-table table table-dark");
+                var thead = $("<thead>").appendTo(table);
+                var tbody = $("<tbody>").appendTo(table);
+
+                // Crear la fila de encabezado
+                var headerRow = $("<tr>").appendTo(thead);
+                $("<th>").text("ID").appendTo(headerRow);
+                $("<th>").text("Nombre").appendTo(headerRow);
+                $("<th>").text("Imagen").appendTo(headerRow);
+                $("<th>").text("Acciones").appendTo(headerRow);
+
+                // Iterar sobre los datos y agregar filas a la tabla
+                data.forEach(function (personaje) {
+                    var row = $("<tr>").appendTo(tbody);
+                    $("<td>").text(personaje.idPersonaje).appendTo(row);
+                    $("<td>").text(personaje.nombre).appendTo(row);
+                    $("<td>").html('<img src="' + personaje.imagen + '" style="width: 150px;">').appendTo(row);
+                    $("<td>").html('<a href="/Personajes/Details?idPersonaje=' + personaje.idPersonaje  + '" class="btn btn-primary">Detalles</a>').appendTo(row);
+                });
+
+                // Agregar la tabla al elemento con el ID "content"
+                $("#content").append(table);
             });
         });
     </script>
