@@ -24,6 +24,36 @@ namespace MvcApiPersonajesAWS.Controllers {
             return View(personajes);
         }
 
+
+        public IActionResult CreatePersonaje() {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreatePersonaje(Personaje personaje) {
+            await this.service.InsertPersonajeAsync(personaje.Nombre, personaje.Imagen);
+            return View();
+        }
+
+
+        public IActionResult UpdatePersonaje() {
+            return View();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdatePersonaje(Personaje personaje) {
+            await this.service.UpdatePersonajeAsync(personaje.IdPersonaje, personaje.Nombre, personaje.Imagen);
+            return View();
+        }
+        
+
+        [HttpDelete]
+        public async Task<IActionResult> DeletePersonaje(int idPersonaje) {
+            await this.service.DeletePersonajeAsync(idPersonaje);
+            return View();
+        }
+
+
         public async Task<IActionResult> Test() {
             ViewData["TEST"] = await this.service.TestApiAsync();
             return View();

@@ -7,7 +7,7 @@
 <h1>ApiPersonajes</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="CreatePersonaje">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -38,8 +38,8 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a asp-controller="Personajes" asp-action="UpdatePersonaje">Update</a>
+                <a asp-controller="Personajes" asp-action="DeletePersonaje" asp-route-idPersonaje="@item.IdPersonaje">Delete</a>
             </td>
         </tr>
 }
