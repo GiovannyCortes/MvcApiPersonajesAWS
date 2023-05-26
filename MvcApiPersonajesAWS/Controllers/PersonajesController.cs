@@ -40,14 +40,13 @@ namespace MvcApiPersonajesAWS.Controllers {
             return View();
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> UpdatePersonaje(Personaje personaje) {
             await this.service.UpdatePersonajeAsync(personaje.IdPersonaje, personaje.Nombre, personaje.Imagen);
             return RedirectToAction("ApiPersonajes");
         }
 
 
-        [HttpDelete]
         public async Task<IActionResult> DeletePersonaje(int idPersonaje) {
             await this.service.DeletePersonajeAsync(idPersonaje);
             return RedirectToAction("ApiPersonajes");
