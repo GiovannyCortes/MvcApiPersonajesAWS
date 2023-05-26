@@ -33,13 +33,18 @@ namespace MvcApiPersonajesAWS.Services {
         }
 
         public async Task<T?> CallApiAsync<T>(string request) {
-            using (HttpClient client = new HttpClient()) {
-                client.BaseAddress = new Uri(this.UrlApi);
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.header);
+            using (HttpClientHandler handler = new HttpClientHandler()) {
+                handler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => {
+                    return true;
+                };
+                using (HttpClient client = new HttpClient(handler)) {
+                    client.BaseAddress = new Uri(this.UrlApi);
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(this.header);
 
-                HttpResponseMessage response = await client.GetAsync(request);
-                return (response.IsSuccessStatusCode) ? await response.Content.ReadAsAsync<T>() : default(T);
+                    HttpResponseMessage response = await client.GetAsync(request);
+                    return (response.IsSuccessStatusCode) ? await response.Content.ReadAsAsync<T>() : default(T);
+                }
             }
         }
 
