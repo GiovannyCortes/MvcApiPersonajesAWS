@@ -13,7 +13,7 @@ namespace MvcApiPersonajesAWS.Services {
         }
 
         public async Task<string> TestApiAsync() {
-            string request = "/api/personajes";
+            string request = "/api/personajes/GetPersonajes";
 
             // Utilizamos un manejador para la petición del HttpClient
             var handler = new HttpClientHandler();
