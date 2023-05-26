@@ -32,7 +32,7 @@ namespace MvcApiPersonajesAWS.Controllers {
         [HttpPost]
         public async Task<IActionResult> CreatePersonaje(Personaje personaje) {
             await this.service.InsertPersonajeAsync(personaje.Nombre, personaje.Imagen);
-            return View();
+            return RedirectToAction("ApiPersonajes");
         }
 
 
@@ -43,14 +43,14 @@ namespace MvcApiPersonajesAWS.Controllers {
         [HttpPut]
         public async Task<IActionResult> UpdatePersonaje(Personaje personaje) {
             await this.service.UpdatePersonajeAsync(personaje.IdPersonaje, personaje.Nombre, personaje.Imagen);
-            return View();
+            return RedirectToAction("ApiPersonajes");
         }
-        
+
 
         [HttpDelete]
         public async Task<IActionResult> DeletePersonaje(int idPersonaje) {
             await this.service.DeletePersonajeAsync(idPersonaje);
-            return View();
+            return RedirectToAction("ApiPersonajes");
         }
 
 
