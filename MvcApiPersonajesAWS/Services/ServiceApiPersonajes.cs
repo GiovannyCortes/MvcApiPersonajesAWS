@@ -49,7 +49,7 @@ namespace MvcApiPersonajesAWS.Services {
         }
 
         public async Task<List<Personaje>> GetPersonajesAsync() {
-            string request = "/api/personajes";
+            string request = "/api/personajes/GetPersonajes";
             List<Personaje> personajes = await this.CallApiAsync<List<Personaje>>(request);
             return personajes;
         }
